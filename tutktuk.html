@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Girlfriend?</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffe6e6;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        h1 { color: #d63384; }
+
+        .buttons {
+            margin-top: 30px;
+            position: relative;
+            height: 100px;
+            width: 300px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+        }
+
+        #noBtn {
+            background-color: #6c757d;
+            color: white;
+            position: absolute;
+            left: 170px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="mainContainer">
+        <h1 id="question">Nirali, will you be my girlfriend? 💖</h1>
+        <div class="buttons">
+            <button id="yesBtn">Yes! ✨</button>
+            <button id="noBtn">No 🙈</button>
+        </div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const container = document.getElementById('mainContainer');
+
+        // Function to move the "No" button
+        noBtn.addEventListener('mouseover', () => {
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+            noBtn.style.position = 'fixed';
+        });
+
+        // What happens when she clicks Yes
+        yesBtn.addEventListener('click', () => {
+            container.innerHTML = `
+                <h1>Yayyy! You said YES! 💞</h1>
+                <p>Knew you'd say yes 😉</p>
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIwd3B6YjV4bmR4eG54eG54eG54eG54eG54eG54eG54eG54JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/l1KdcBhEUT1twJC3m/giphy.gif" alt="Friends Celebration" style="width:100%; border-radius:10px;">
+            `;
+        });
+    </script>
+</body>
+</html>
