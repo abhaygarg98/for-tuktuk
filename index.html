@@ -12,17 +12,24 @@
             justify-content: center;
             height: 100vh;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #ffe6e6;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 34%),
+                radial-gradient(circle at 85% 25%, rgba(255, 182, 193, 0.55) 0%, rgba(255, 182, 193, 0) 36%),
+                radial-gradient(circle at 50% 85%, rgba(255, 214, 224, 0.5) 0%, rgba(255, 214, 224, 0) 35%),
+                linear-gradient(135deg, #ffd1dc 0%, #ffe6ee 45%, #fff3f7 100%);
             margin: 0;
             overflow: hidden;
+            background-size: cover;
+            background-attachment: fixed;
         }
 
         .container {
             text-align: center;
-            background: white;
+            background: rgba(255, 255, 255, 0.92);
             padding: 50px;
             border-radius: 20px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.7);
         }
 
         h1 { color: #d63384; }
@@ -86,7 +93,7 @@
             container.innerHTML = `
                 <h1>Told ya! 💞</h1>
                 <p>Knew you'd believe me 😉</p>
-                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIwd3B6YjV4bmR4eG54eG54eG54eG54eG54eG54eG54eG54JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/l1KdcBhEUT1twJC3m/giphy.gif" alt="Friends Celebration" style="width:100%; border-radius:10px;">
+                <img src="https://images.pexels.com/photos/708392/pexels-photo-708392.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Friends Celebration" style="width:100%; max-width:460px; border-radius:12px; box-shadow:0 8px 18px rgba(214, 51, 132, 0.25);" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80';">
             `;
         });
     </script>
