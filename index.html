@@ -1,246 +1,340 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Cuteness Poll</title>
-	<style>
-		:root {
-			--pink: #ff4d8d;
-			--pink-soft: #ffd9e8;
-			--bg1: #fff3f8;
-			--bg2: #ffe6f1;
-			--text: #5b2440;
-		}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cutie</title>
+    <style>
+        :root {
+            --pink: #ff4d8d;
+            --bg1: #fff3f8;
+            --bg2: #ffe6f1;
+            --text: #5b2440;
+        }
 
-		* {
-			box-sizing: border-box;
-		}
+        * { box-sizing: border-box; }
 
-		body {
-			margin: 0;
-			min-height: 100vh;
-			display: grid;
-			place-items: center;
-			font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-			color: var(--text);
-			background:
-				radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.8), transparent 35%),
-				radial-gradient(circle at 90% 10%, rgba(255, 182, 210, 0.6), transparent 33%),
-				linear-gradient(135deg, var(--bg1), var(--bg2));
-			padding: 20px;
-		}
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.8), transparent 35%),
+                radial-gradient(circle at 90% 10%, rgba(255, 182, 210, 0.6), transparent 33%),
+                linear-gradient(135deg, var(--bg1), var(--bg2));
+            padding: 20px;
+        }
 
-		.card {
-			width: min(700px, 95vw);
-			background: rgba(255, 255, 255, 0.93);
-			border: 1px solid rgba(255, 255, 255, 0.9);
-			border-radius: 24px;
-			box-shadow: 0 14px 30px rgba(214, 51, 132, 0.18);
-			padding: 32px 24px;
-			text-align: center;
-		}
+        .card {
+            width: min(760px, 96vw);
+            background: rgba(255, 255, 255, 0.93);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            border-radius: 24px;
+            box-shadow: 0 14px 30px rgba(214, 51, 132, 0.18);
+            padding: 32px 24px;
+            text-align: center;
+        }
 
-		h1 {
-			margin: 0 0 10px;
-			font-size: clamp(1.5rem, 2.5vw, 2.2rem);
-		}
+        h1 {
+            margin: 0 0 10px;
+            font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+        }
 
-		p {
-			margin: 0;
-			font-size: 1.05rem;
-		}
+        h2 { margin: 0 0 10px; }
 
-		.actions {
-			display: flex;
-			justify-content: center;
-			gap: 14px;
-			margin-top: 24px;
-			flex-wrap: wrap;
-		}
+        p {
+            margin: 0;
+            font-size: 1.05rem;
+        }
 
-		button {
-			border: none;
-			border-radius: 12px;
-			padding: 12px 24px;
-			font-size: 1rem;
-			font-weight: 600;
-			cursor: pointer;
-			transition: transform .15s ease, opacity .2s ease;
-		}
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
 
-		button:hover {
-			transform: translateY(-2px);
-		}
+        button {
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform .15s ease, opacity .2s ease;
+        }
 
-		#yesBtn {
-			background: var(--pink);
-			color: #fff;
-		}
+        button:hover { transform: translateY(-2px); }
 
-		#noBtn {
-			background: #7a6a74;
-			color: #fff;
-		}
+        .primary { background: var(--pink); color: #fff; }
+        .secondary { background: #7a6a74; color: #fff; }
 
-		.hidden {
-			display: none !important;
-		}
+        .hidden { display: none !important; }
 
-		.loader-wrap {
-			margin-top: 26px;
-		}
+        .loader-wrap { margin-top: 26px; }
 
-		.meter {
-			width: min(520px, 92%);
-			margin: 14px auto 8px;
-			background: #f5d3e2;
-			border-radius: 999px;
-			height: 24px;
-			overflow: hidden;
-			box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.12);
-		}
+        .meter {
+            width: min(520px, 92%);
+            margin: 14px auto 8px;
+            background: #f5d3e2;
+            border-radius: 999px;
+            height: 24px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.12);
+        }
 
-		.bar {
-			height: 100%;
-			width: 0%;
-			background: linear-gradient(90deg, #ff669d, #ff2d7a);
-			transition: width .25s linear;
-		}
+        .bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #ff669d, #ff2d7a);
+            transition: width .25s linear;
+        }
 
-		.percent {
-			font-weight: 700;
-			font-size: 1.1rem;
-			margin-top: 8px;
-		}
+        .percent {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-top: 8px;
+        }
 
-		.result {
-			margin-top: 20px;
-		}
+        .result { margin-top: 20px; }
 
-		.art {
-			width: min(460px, 100%);
-			margin: 16px auto 0;
-			display: block;
-			border-radius: 14px;
-			box-shadow: 0 10px 24px rgba(91, 36, 64, 0.2);
-		}
-	</style>
+        .art {
+            width: min(460px, 100%);
+            margin: 16px auto 0;
+            display: block;
+            border-radius: 14px;
+            box-shadow: 0 10px 24px rgba(91, 36, 64, 0.2);
+        }
+
+        .miss-buttons {
+            margin-top: 30px;
+            position: relative;
+            height: 110px;
+            width: 320px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #missNoBtn {
+            position: absolute;
+            left: 185px;
+            top: 0;
+        }
+    </style>
 </head>
 <body>
-	<main class="card" id="card">
-		<h1 id="questionTitle">Let's calculate your cuteness? 💗</h1>
-		<p id="questionSubtitle">Pick one option below.</p>
+    <main class="card" id="card">
+        <section id="chooserSection">
+            <h1>You wanna have it all huh? Fine! 😌</h1>
+            <p>Pick what you want to play:</p>
+            <div class="actions">
+                <button id="openMissBtn" class="primary">Do you miss uncle?</button>
+                <button id="openCuteBtn" class="secondary">You wanna check your cuteness</button>
+            </div>
+        </section>
 
-		<div class="actions" id="actions">
-			<button id="yesBtn">Yes</button>
-			<button id="noBtn">No</button>
-		</div>
+        <section id="missSection" class="hidden">
+            <h1>Do you miss uncle? 💗</h1>
+            <div class="miss-buttons" id="missButtons">
+                <button id="missYesBtn" class="primary">Yes! ❤️</button>
+                <button id="missNoBtn" class="secondary">No 💔</button>
+            </div>
+            <section id="missResult" class="result hidden"></section>
+        </section>
 
-		<section id="loaderSection" class="loader-wrap hidden">
-			<p>Analyzing cuteness levels... please wait ✨</p>
-			<div class="meter" aria-label="cuteness loader">
-				<div class="bar" id="bar"></div>
-			</div>
-			<div class="percent" id="percentText">0%</div>
-		</section>
+        <section id="cuteSection" class="hidden">
+            <h1 id="questionTitle">Let's calculate your cuteness? 💗</h1>
+            <p id="questionSubtitle">Pick one option below.</p>
 
-		<section id="result" class="result hidden"></section>
-	</main>
+            <div class="actions" id="actions">
+                <button id="yesBtn" class="primary">Yes</button>
+                <button id="noBtn" class="secondary">No</button>
+            </div>
 
-	<script>
-		const yesBtn = document.getElementById('yesBtn');
-		const noBtn = document.getElementById('noBtn');
-		const actions = document.getElementById('actions');
-		const questionTitle = document.getElementById('questionTitle');
-		const questionSubtitle = document.getElementById('questionSubtitle');
-		const loaderSection = document.getElementById('loaderSection');
-		const bar = document.getElementById('bar');
-		const percentText = document.getElementById('percentText');
-		const result = document.getElementById('result');
+            <section id="loaderSection" class="loader-wrap hidden">
+                <p>Analyzing cuteness levels... please wait ✨</p>
+                <div class="meter" aria-label="cuteness loader">
+                    <div class="bar" id="bar"></div>
+                </div>
+                <div class="percent" id="percentText">0%</div>
+            </section>
 
-		const loveyArt = `
-			<svg class="art" viewBox="0 0 520 280" role="img" aria-label="lovey hearts">
-				<defs>
-					<linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-						<stop offset="0%" stop-color="#fff7fb"/>
-						<stop offset="100%" stop-color="#ffe0ef"/>
-					</linearGradient>
-				</defs>
-				<rect x="0" y="0" width="520" height="280" fill="url(#g1)"/>
-				<path d="M120 90 C120 60, 160 55, 170 80 C180 55, 220 60, 220 90 C220 120, 185 140, 170 160 C155 140, 120 120, 120 90 Z" fill="#ff4d8d"/>
-				<path d="M280 100 C280 72, 315 68, 325 88 C335 68, 370 72, 370 100 C370 126, 340 144, 325 160 C310 144, 280 126, 280 100 Z" fill="#ff7cab"/>
-				<path d="M380 70 C380 52, 402 49, 409 62 C416 49, 438 52, 438 70 C438 88, 419 100, 409 111 C399 100, 380 88, 380 70 Z" fill="#ff9fc2"/>
-				<text x="260" y="230" text-anchor="middle" font-size="28" font-family="Segoe UI, sans-serif" fill="#b03060">You are the cutest 💕</text>
-			</svg>
-		`;
+            <section id="result" class="result hidden"></section>
+        </section>
+    </main>
 
-		const bunnyArt = `
-			<svg class="art" viewBox="0 0 520 300" role="img" aria-label="tired bunny">
-				<rect x="0" y="0" width="520" height="300" fill="#f7f5ff"/>
-				<ellipse cx="260" cy="265" rx="120" ry="18" fill="rgba(100,80,140,0.2)"/>
+    <script>
+        const chooserSection = document.getElementById('chooserSection');
+        const missSection = document.getElementById('missSection');
+        const cuteSection = document.getElementById('cuteSection');
 
-				<ellipse cx="220" cy="80" rx="24" ry="58" fill="#ffffff" stroke="#d7d1ef" stroke-width="3"/>
-				<ellipse cx="300" cy="80" rx="24" ry="58" fill="#ffffff" stroke="#d7d1ef" stroke-width="3"/>
-				<ellipse cx="220" cy="88" rx="10" ry="38" fill="#ffd2e2"/>
-				<ellipse cx="300" cy="88" rx="10" ry="38" fill="#ffd2e2"/>
+        const openMissBtn = document.getElementById('openMissBtn');
+        const openCuteBtn = document.getElementById('openCuteBtn');
 
-				<circle cx="260" cy="155" r="78" fill="#ffffff" stroke="#d7d1ef" stroke-width="3"/>
-				<ellipse cx="235" cy="150" rx="8" ry="10" fill="#5f557f"/>
-				<ellipse cx="285" cy="150" rx="8" ry="10" fill="#5f557f"/>
-				<circle cx="260" cy="172" r="7" fill="#ff8fb2"/>
-				<path d="M246 186 Q260 198 274 186" fill="none" stroke="#5f557f" stroke-width="4" stroke-linecap="round"/>
+        const missNoBtn = document.getElementById('missNoBtn');
+        const missYesBtn = document.getElementById('missYesBtn');
+        const missResult = document.getElementById('missResult');
 
-				<text x="260" y="245" text-anchor="middle" font-size="24" font-family="Segoe UI, sans-serif" fill="#594675">I'm tired... that's beyond my limits 😵‍💫</text>
-			</svg>
-		`;
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const actions = document.getElementById('actions');
+        const questionTitle = document.getElementById('questionTitle');
+        const questionSubtitle = document.getElementById('questionSubtitle');
+        const loaderSection = document.getElementById('loaderSection');
+        const bar = document.getElementById('bar');
+        const percentText = document.getElementById('percentText');
+        const result = document.getElementById('result');
 
-		noBtn.addEventListener('click', () => {
-			questionTitle.classList.add('hidden');
-			questionSubtitle.classList.add('hidden');
-			actions.classList.add('hidden');
-			loaderSection.classList.add('hidden');
-			result.classList.remove('hidden');
-			result.innerHTML = `
-				<h2>We don't need to.</h2>
-				<p>The world knows you are cutest 💖</p>
-				${loveyArt}
-			`;
-		});
+        const coupleArt = `
+            <svg viewBox="0 0 520 300" role="img" aria-label="Man holding flowers for his loved lady" class="art" style="background:linear-gradient(180deg,#fff7fb 0%,#ffe6ef 100%);">
+                <rect x="0" y="0" width="520" height="300" fill="transparent" />
+                <ellipse cx="260" cy="275" rx="180" ry="16" fill="rgba(214,51,132,0.18)"/>
 
-		yesBtn.addEventListener('click', () => {
-			questionTitle.classList.add('hidden');
-			questionSubtitle.classList.add('hidden');
-			actions.classList.add('hidden');
-			result.classList.add('hidden');
-			loaderSection.classList.remove('hidden');
+                <circle cx="170" cy="105" r="30" fill="#ffd7c2"/>
+                <rect x="145" y="136" width="50" height="78" rx="16" fill="#3f4e8c"/>
+                <rect x="128" y="146" width="18" height="62" rx="9" fill="#ffd7c2"/>
+                <rect x="194" y="146" width="18" height="62" rx="9" fill="#ffd7c2"/>
+                <rect x="154" y="212" width="16" height="56" rx="8" fill="#2f3a66"/>
+                <rect x="172" y="212" width="16" height="56" rx="8" fill="#2f3a66"/>
 
-			let percent = 0;
-			const id = setInterval(() => {
-				percent += Math.floor(Math.random() * 4) + 2;
+                <circle cx="350" cy="110" r="30" fill="#ffe0cc"/>
+                <rect x="325" y="140" width="50" height="76" rx="16" fill="#c94f7c"/>
+                <rect x="306" y="150" width="18" height="60" rx="9" fill="#ffe0cc"/>
+                <rect x="376" y="150" width="18" height="60" rx="9" fill="#ffe0cc"/>
+                <rect x="334" y="214" width="16" height="54" rx="8" fill="#8b2f52"/>
+                <rect x="352" y="214" width="16" height="54" rx="8" fill="#8b2f52"/>
 
-				if (percent >= 110) {
-					percent = 110;
-					clearInterval(id);
-					percentText.textContent = `${percent}%`;
-					bar.style.width = '100%';
+                <path d="M200 175 C225 155, 255 150, 286 175" stroke="#3d9b5f" stroke-width="5" fill="none"/>
+                <line x1="246" y1="173" x2="246" y2="135" stroke="#3d9b5f" stroke-width="4"/>
+                <line x1="228" y1="171" x2="228" y2="140" stroke="#3d9b5f" stroke-width="4"/>
+                <line x1="264" y1="171" x2="264" y2="142" stroke="#3d9b5f" stroke-width="4"/>
 
-					setTimeout(() => {
-						loaderSection.classList.add('hidden');
-						result.classList.remove('hidden');
-						result.innerHTML = `
-							<h2>It's beyond my limits 😮‍💨</h2>
-							<p>Sorry, can't calculate.</p>
-							${bunnyArt}
-						`;
-					}, 800);
-					return;
-				}
+                <circle cx="246" cy="130" r="13" fill="#ff4d6d"/>
+                <circle cx="228" cy="136" r="11" fill="#ff7a8f"/>
+                <circle cx="264" cy="138" r="11" fill="#ff7a8f"/>
+                <circle cx="240" cy="122" r="8" fill="#ff8fa3"/>
+                <circle cx="252" cy="121" r="8" fill="#ff8fa3"/>
 
-				percentText.textContent = `${percent}%`;
-				bar.style.width = `${Math.min(percent, 100)}%`;
-			}, 120);
-		});
-	</script>
+                <path d="M170 65 C176 56, 188 56, 194 65 C200 74, 188 84, 182 90 C176 84, 164 74, 170 65 Z" fill="#ff4d6d"/>
+                <path d="M340 66 C346 57, 358 57, 364 66 C370 75, 358 85, 352 91 C346 85, 334 75, 340 66 Z" fill="#ff4d6d"/>
+
+                <text x="260" y="35" text-anchor="middle" font-size="20" font-family="Segoe UI, sans-serif" fill="#c43d70">For You, My Love 💐</text>
+            </svg>
+        `;
+
+        const loveyArt = `
+            <svg class="art" viewBox="0 0 520 280" role="img" aria-label="lovey hearts">
+                <defs>
+                    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#fff7fb"/>
+                        <stop offset="100%" stop-color="#ffe0ef"/>
+                    </linearGradient>
+                </defs>
+                <rect x="0" y="0" width="520" height="280" fill="url(#g1)"/>
+                <path d="M120 90 C120 60, 160 55, 170 80 C180 55, 220 60, 220 90 C220 120, 185 140, 170 160 C155 140, 120 120, 120 90 Z" fill="#ff4d8d"/>
+                <path d="M280 100 C280 72, 315 68, 325 88 C335 68, 370 72, 370 100 C370 126, 340 144, 325 160 C310 144, 280 126, 280 100 Z" fill="#ff7cab"/>
+                <path d="M380 70 C380 52, 402 49, 409 62 C416 49, 438 52, 438 70 C438 88, 419 100, 409 111 C399 100, 380 88, 380 70 Z" fill="#ff9fc2"/>
+                <text x="260" y="230" text-anchor="middle" font-size="28" font-family="Segoe UI, sans-serif" fill="#b03060">You are the cutest 💕</text>
+            </svg>
+        `;
+
+        const bunnyArt = `
+            <svg class="art" viewBox="0 0 520 300" role="img" aria-label="tired bunny">
+                <rect x="0" y="0" width="520" height="300" fill="#f7f5ff"/>
+                <ellipse cx="260" cy="265" rx="120" ry="18" fill="rgba(100,80,140,0.2)"/>
+
+                <ellipse cx="220" cy="80" rx="24" ry="58" fill="#ffffff" stroke="#d7d1ef" stroke-width="3"/>
+                <ellipse cx="300" cy="80" rx="24" ry="58" fill="#ffffff" stroke="#d7d1ef" stroke-width="3"/>
+                <ellipse cx="220" cy="88" rx="10" ry="38" fill="#ffd2e2"/>
+                <ellipse cx="300" cy="88" rx="10" ry="38" fill="#ffd2e2"/>
+
+                <circle cx="260" cy="155" r="78" fill="#ffffff" stroke="#d7d1ef" stroke-width="3"/>
+                <ellipse cx="235" cy="150" rx="8" ry="10" fill="#5f557f"/>
+                <ellipse cx="285" cy="150" rx="8" ry="10" fill="#5f557f"/>
+                <circle cx="260" cy="172" r="7" fill="#ff8fb2"/>
+                <path d="M246 186 Q260 198 274 186" fill="none" stroke="#5f557f" stroke-width="4" stroke-linecap="round"/>
+
+                <text x="260" y="245" text-anchor="middle" font-size="24" font-family="Segoe UI, sans-serif" fill="#594675">I'm tired... that's beyond my limits 😵‍💫</text>
+            </svg>
+        `;
+
+        openMissBtn.addEventListener('click', () => {
+            chooserSection.classList.add('hidden');
+            missSection.classList.remove('hidden');
+        });
+
+        openCuteBtn.addEventListener('click', () => {
+            chooserSection.classList.add('hidden');
+            cuteSection.classList.remove('hidden');
+        });
+
+        missNoBtn.addEventListener('mouseover', () => {
+            const x = Math.random() * (window.innerWidth - missNoBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - missNoBtn.offsetHeight);
+            missNoBtn.style.left = `${x}px`;
+            missNoBtn.style.top = `${y}px`;
+            missNoBtn.style.position = 'fixed';
+        });
+
+        missYesBtn.addEventListener('click', () => {
+            missResult.classList.remove('hidden');
+            missResult.innerHTML = `
+                <h2>Told ya! 💞</h2>
+                <p>Knew you'd believe me 😉</p>
+                ${coupleArt}
+            `;
+        });
+
+        noBtn.addEventListener('click', () => {
+            questionTitle.classList.add('hidden');
+            questionSubtitle.classList.add('hidden');
+            actions.classList.add('hidden');
+            loaderSection.classList.add('hidden');
+            result.classList.remove('hidden');
+            result.innerHTML = `
+                <h2>We don't need to.</h2>
+                <p>The world knows you are cutest 💖</p>
+                ${loveyArt}
+            `;
+        });
+
+        yesBtn.addEventListener('click', () => {
+            questionTitle.classList.add('hidden');
+            questionSubtitle.classList.add('hidden');
+            actions.classList.add('hidden');
+            result.classList.add('hidden');
+            loaderSection.classList.remove('hidden');
+
+            let percent = 0;
+            const id = setInterval(() => {
+                percent += Math.floor(Math.random() * 4) + 2;
+
+                if (percent >= 110) {
+                    percent = 110;
+                    clearInterval(id);
+                    percentText.textContent = `${percent}%`;
+                    bar.style.width = '100%';
+
+                    setTimeout(() => {
+                        loaderSection.classList.add('hidden');
+                        result.classList.remove('hidden');
+                        result.innerHTML = `
+                            <h2>It's beyond my limits 😮‍💨</h2>
+                            <p>Sorry, can't calculate.</p>
+                            ${bunnyArt}
+                        `;
+                    }, 800);
+                    return;
+                }
+
+                percentText.textContent = `${percent}%`;
+                bar.style.width = `${Math.min(percent, 100)}%`;
+            }, 120);
+        });
+    </script>
 </body>
 </html>
