@@ -129,8 +129,8 @@
 </head>
 <body>
 	<main class="card" id="card">
-		<h1>Let's calculate your cuteness? 💗</h1>
-		<p>Pick one option below.</p>
+		<h1 id="questionTitle">Let's calculate your cuteness? 💗</h1>
+		<p id="questionSubtitle">Pick one option below.</p>
 
 		<div class="actions" id="actions">
 			<button id="yesBtn">Yes</button>
@@ -152,6 +152,8 @@
 		const yesBtn = document.getElementById('yesBtn');
 		const noBtn = document.getElementById('noBtn');
 		const actions = document.getElementById('actions');
+		const questionTitle = document.getElementById('questionTitle');
+		const questionSubtitle = document.getElementById('questionSubtitle');
 		const loaderSection = document.getElementById('loaderSection');
 		const bar = document.getElementById('bar');
 		const percentText = document.getElementById('percentText');
@@ -194,6 +196,8 @@
 		`;
 
 		noBtn.addEventListener('click', () => {
+			questionTitle.classList.add('hidden');
+			questionSubtitle.classList.add('hidden');
 			actions.classList.add('hidden');
 			loaderSection.classList.add('hidden');
 			result.classList.remove('hidden');
@@ -205,6 +209,8 @@
 		});
 
 		yesBtn.addEventListener('click', () => {
+			questionTitle.classList.add('hidden');
+			questionSubtitle.classList.add('hidden');
 			actions.classList.add('hidden');
 			result.classList.add('hidden');
 			loaderSection.classList.remove('hidden');
